@@ -1,10 +1,15 @@
 import './App.css'
+import { BrowserRouter } from "react-router-dom";
+import Navbar from './components/Navbar';
+import AppRoutes from './routes/appRoutes';
 
 function App() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold">Employee Hierarchy App</h1>
-      <p className="text-gray-600 mt-2">Setup complete.</p>
+    <div className='min-h-screen bg-gray-100'>
+      <BrowserRouter>
+        <Navbar />
+        <AppRoutes />
+      </BrowserRouter>
     </div>
   );
 }
