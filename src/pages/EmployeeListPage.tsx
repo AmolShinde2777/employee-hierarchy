@@ -1,3 +1,5 @@
+import EmployeeForm from "../components/employees/EmployeeForm";
+import EmployeeItem from "../components/employees/EmployeeItem";
 import type { Employee } from "../data/employees"
 
 interface Props {
@@ -9,27 +11,23 @@ interface Props {
 
 export default function EmployeeListPage({
     employees,
+    onAdd,
     onDelete,
 }: Props) {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Employee List</h1>
-            <ul className="space-y-2">
-                {employees.map((emp) => (
-                    <li
-                        key={emp.id}
-                        className="bg-white p-4 rounded shadow flex justify-between"
-                    >
-                        <span>
-                            {emp.name} - {emp.role}
-                        </span>
-                        <button
-                            className="text-red-600 hover:underline"
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
+            <EmployeeForm onAdd={onAdd} />
+            <ul className="space-y-3 mt-6">
+                {
+                    employees.map((emp) => (
+                        <EmployeeItem
+                            key={emp.id}
+                            employee={emp}
+                            onDelete={onDelete}
+                        />
+                    ))
+                }
             </ul>
         </div>
     )
