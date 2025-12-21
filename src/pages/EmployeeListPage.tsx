@@ -1,32 +1,28 @@
 import EmployeeForm from "../components/employees/EmployeeForm";
 import EmployeeItem from "../components/employees/EmployeeItem";
-import type { Employee } from "../data/employees"
+import { useEmployeeContext } from "../context/EmployeeContext";
 
-interface Props {
-    employees: Employee[];
-    onAdd: (e: Employee) => void;
-    onUpdate: (e: Employee) => void;
-    onDelete: (id: number) => void;
-}
+export default function EmployeeListPage() {
 
-export default function EmployeeListPage({
-    employees,
-    onAdd,
-    onDelete,
-    onUpdate
-}: Props) {
+    const { state, dispatch } = useEmployeeContext();
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Employee List</h1>
-            <EmployeeForm onAdd={onAdd} />
+
+            <EmployeeForm onAdd={employee => dispatch({ type: "ADD_EMPLOYEE", payload: employee})} />
+                
             <ul className="space-y-3 mt-6">
                 {
-                    employees.map((emp) => (
+                    state.employees.map((emp) => (
                         <EmployeeItem
                             key={emp.id}
                             employee={emp}
-                            onDelete={onDelete}
-                            onUpdate={onUpdate}
+                            onUpdate={employee =>
+                                dispatch({ type: "UPDATE_EMPLOYEE", payload: employee})
+                            }
+                            onDelete={id =>
+                                dispatch({ type: "DELETE_EMPLOYEE", payload: id })
+                            }
                         />
                     ))
                 }

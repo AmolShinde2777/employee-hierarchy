@@ -27,7 +27,7 @@ export default function EmployeeForm({
     return (
         <div className="bg-white p-4 rounded shadow">
             <h2 className="font-semibold mb-3">Add Employee</h2>
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
                 <input
                     className="border p-2 rounded flex-1"
                     placeholder="Name"
