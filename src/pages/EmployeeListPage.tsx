@@ -13,6 +13,7 @@ export default function EmployeeListPage({
     employees,
     onAdd,
     onDelete,
+    onUpdate
 }: Props) {
     return (
         <div className="p-6">
@@ -25,6 +26,7 @@ export default function EmployeeListPage({
                             key={emp.id}
                             employee={emp}
                             onDelete={onDelete}
+                            onUpdate={onUpdate}
                         />
                     ))
                 }
