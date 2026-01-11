@@ -2,9 +2,12 @@ import { createContext, useContext, useMemo, useReducer, type ReactNode } from "
 import type { EmployeeAction, EmployeeState } from "./types";
 import { employeeReducer } from "./employeeReducer";
 import { EMPLOYEES } from "../data/employees"
+import { buildEmployeeTree } from "../utils/buildEmployeeTree";
+import type { EmployeeTreeNode } from "../types/employeeTree";
 
 interface EmployeeContextValue {
     state: EmployeeState;
+    tree: EmployeeTreeNode[];
     dispatch: React.Dispatch<EmployeeAction>
 }
 
@@ -17,8 +20,13 @@ export function EmployeeProvider({ children } : { children: ReactNode }) {
         employees: EMPLOYEES,
     });
 
+    const tree = useMemo(
+        () => buildEmployeeTree(state.employees),
+        [state.employees]
+    );
+
     const value = useMemo(
-        () => ({ state, dispatch }),
+        () => ({ state, tree, dispatch }),
         [state]
     );
 
