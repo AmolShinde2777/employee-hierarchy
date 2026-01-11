@@ -1,8 +1,9 @@
 import EmployeeTreeNode from "../components/hierarchy/EmployeeTreeNode";
-import { useEmployeeContext } from "../context/EmployeeContext"
+import { useAppSelector } from "../store/hooks";
+import { selectEmployeeTree } from "../store/selectors";
 
 export default function EmployeeHierarchyPage() {
-    const { tree } = useEmployeeContext();
+    const tree = useAppSelector(selectEmployeeTree);
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Employee Hierarchy</h1>
